@@ -36,7 +36,7 @@ CreateThread(function()
             if dist < 5.0 then
 				sleep = 0
 
-                CreateMarker(1, v.marker, 1.5, 1.5, 1.0, 0, 0, 255, 150)
+                CreateMarker(1, v.marker, 1.5, 1.5, 1.0, 255, 255, 255, 255)
 				
                 if dist < 1.5 then
                     Prompt('Press ~INPUT_CONTEXT~ to spawn a Vehicle')
