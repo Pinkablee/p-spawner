@@ -7,7 +7,10 @@ author 'Pinkable'
 version '1.0.0'
 description 'Vehicle Spawner'
 
-shared_script '@ox_lib/init.lua'
+shared_scripts {
+    '@ox_lib/init.lua',
+    'config.lua'
+}
 
 client_scripts {
     'client/functions.lua',
