@@ -6,7 +6,7 @@ local function OpenSpawner(vehicleSpawn, heading)
             title = v.label,
             description = "Spawn this vehicle",
             arrow = true,
-            event = 'p-spawner:client:spawnVehicle',
+            event = 'spawner:spawnVehicle',
             args = {
                 model = v.model,
                 coords = vehicleSpawn,
