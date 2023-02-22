@@ -4,7 +4,7 @@ local function OpenSpawner(vehicleSpawn, heading)
     for k, v in pairs(cfg.vehicles) do
         table.insert(vehicles, {
             title = v.label,
-            description = "Spawn this vehicle",
+            description = 'Spawn this vehicle',
             arrow = true,
             event = 'spawner:spawnVehicle',
             args = {
@@ -66,6 +66,6 @@ RegisterNetEvent('spawner:spawnVehicle', function(data)
         local createdVehicle = CreateVehicle(hash, data.coords, data.heading, true, false)
         SetPedIntoVehicle(cache.ped, createdVehicle, -1)
         SetVehicleEngineOn(createdVehicle, true, true, false)
-        SetVehRadioStation(createdVehicle, "OFF")
+        SetVehRadioStation(createdVehicle, 'OFF')
 	end
 end)
