@@ -4,7 +4,7 @@ game 'gta5'
 lua54 'yes'
 
 author 'Pinkable'
-version '1.0.0'
+version '1.0.1'
 description 'Vehicle Spawner'
 
 shared_scripts {
@@ -17,4 +17,8 @@ client_scripts {
     'client/client.lua'
 }
 
-dependencie 'ox_lib'
+server_script 'server/version.lua'
+
+dependencies {
+    'ox_lib'
+}
