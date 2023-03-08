@@ -1,7 +1,7 @@
 local function OpenSpawner(vehicleSpawn, heading)	
     local vehicles = {}
 
-    for k, v in pairs(cfg.vehicles) do
+    for k, v in pairs(cfg?.vehicles) do
         table.insert(vehicles, {
             title = v.label,
             description = 'Spawn this vehicle',
@@ -30,7 +30,7 @@ CreateThread(function()
 
         local coords = GetEntityCoords(cache.ped)
 
-        for k, v in pairs(cfg.locations) do
+        for k, v in pairs(cfg?.locations) do
             local dist = Distance(coords, v.marker)
 
             if dist < 5.0 then
@@ -54,18 +54,18 @@ CreateThread(function()
 end)
 
 RegisterNetEvent('spawner:spawnVehicle', function(data)
-    if data.model then
-        local hash = GetHashKey(data.model)
-        RequestModel(hash)
+    if data.model then return end
 
-        while not HasModelLoaded(hash) do
-            RequestModel(hash) 
-            Wait(100)
-        end
+    local hash = GetHashKey(data.model)
+    RequestModel(hash)
 
-        local createdVehicle = CreateVehicle(hash, data.coords, data.heading, true, false)
-        SetPedIntoVehicle(cache.ped, createdVehicle, -1)
-        SetVehicleEngineOn(createdVehicle, true, true, false)
-        SetVehRadioStation(createdVehicle, 'OFF')
-	end
+    while not HasModelLoaded(hash) do
+    	RequestModel(hash) 
+        Wait(100)
+    end
+
+    local createdVehicle = CreateVehicle(hash, data.coords, data.heading, true, false)
+    SetPedIntoVehicle(cache.ped, createdVehicle, -1)
+    SetVehicleEngineOn(createdVehicle, true, true, false)
+    SetVehRadioStation(createdVehicle, 'OFF')
 end)
