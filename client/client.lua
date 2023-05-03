@@ -6,7 +6,7 @@ local function OpenContext(coords, heading)
             title = v.label,
             description = "Spawn this vehicle!",
             arrow = true,
-            event = "odi_spawner:spawnVehicle",
+            event = "spawnVehicle",
             args = {
                 model = v.model,
                 coords = coords,
@@ -48,7 +48,7 @@ CreateThread(function()
 	end
 end)
 
-RegisterNetEvent("odi_spawner:spawnVehicle", function(data)
+RegisterNetEvent("spawnVehicle", function(data)
     if data.model then return end
 
     local hash = GetHashKey(data.model)
