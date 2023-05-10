@@ -5,7 +5,7 @@ lua54 'yes'
 
 author 'Pinkable'
 version '1.0.3'
-description 'Vehicle Spawner (p-spawner)'
+description 'Vehicle Spawner (odi_spawner)'
 
 shared_scripts {
     '@ox_lib/init.lua',
