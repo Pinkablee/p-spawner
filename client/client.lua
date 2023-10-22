@@ -1,3 +1,5 @@
+local notified = false
+
 local function OpenContext(coords, heading)	
     local options = {}
 
