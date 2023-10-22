@@ -5,7 +5,7 @@ lua54 'yes'
 
 author 'Pinkable'
 version '1.0.0'
-description '(p-spawner) A modern, well-rounded FiveM vehicle spawner system.'
+description '(p-spawner) A modern, well-rounded FiveM vehicle spawner.'
 
 shared_scripts {
     '@ox_lib/init.lua',
