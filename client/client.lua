@@ -1,22 +1,29 @@
 local function OpenContext(coords, heading)	
     local options = {}
 
-    for k, v in pairs(cfg?.vehicles) do
+    for i=1, #cfg?.vehicles do
+        local vehicle = cfg?.vehicles[i]
+
         table.insert(options, {
-            title = v.label,
-            description = "Spawn this vehicle!",
+            title = vehicle.label,
+            description = 'Spawn this vehicle!',
             arrow = true,
-            event = "spawnVehicle",
+            event = 'spawnVehicle',
             args = {
-                model = v.model,
+                model = vehicle.model,
                 coords = coords,
                 heading = heading
             }
         })
     end
 
-    lib.registerContext({id = "vehicle_menu", menu = "vehicle_spawner", title = "Vehicle Spawner", options = options})
-    lib.showContext("vehicle_menu")
+    lib.registerContext({
+        id = 'vehicle_menu', 
+        menu = 'vehicle_spawner', 
+        title = 'Vehicle Spawner', 
+        options = options
+    })
+    lib.showContext('vehicle_menu')
 end
 
 CreateThread(function()
@@ -25,21 +32,29 @@ CreateThread(function()
 
         local coords = GetEntityCoords(cache.ped)
 
-        for k, v in pairs(cfg?.locations) do
-            local dist = Distance(coords, v.marker)
+        for i=1, #cfg?.locations do
+            local location = cfg?.locations[i]
+
+            local dist = #(coords - location.marker)
 
             if dist < 5.0 then
 				sleep = 0
 
-                CreateMarker(1, v.marker, 1.5, 1.5, 1.0, 255, 255, 255, 255)
+                DrawMarker(2, location.marker.x, location.marker.y, location.marker.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.5, 0.5, 255, 255, 255, 150, false, false, 2, true, nil, nil, false)
 				
                 if dist < 1.5 then
-                    Prompt("Press ~INPUT_CONTEXT~ to spawn a Vehicle")
+					if not notified then
+						notified = true
+						lib.showTextUI('[E] - Spawn a Vehicle')
+					end
 
                     local pressed = IsControlJustPressed(0, 38)
 					if pressed then
-						OpenContext(v.coords, v.heading)
+						OpenContext(location.coords, location.heading)
 					end
+                elseif notified then
+					notified = false
+					lib.hideTextUI()
                 end
 			end
 		end
@@ -48,7 +63,7 @@ CreateThread(function()
 	end
 end)
 
-RegisterNetEvent("spawnVehicle", function(data)
+RegisterNetEvent('spawnVehicle', function(data)
     if data.model then return end
 
     local hash = GetHashKey(data.model)
@@ -62,5 +77,5 @@ RegisterNetEvent("spawnVehicle", function(data)
     local vehicle = CreateVehicle(hash, data.coords, data.heading, true, false)
     SetPedIntoVehicle(cache.ped, vehicle, -1)
     SetVehicleEngineOn(vehicle, true, true, false)
-    SetVehRadioStation(vehicle, "OFF")
+    SetVehRadioStation(vehicle, 'OFF')
 end)
