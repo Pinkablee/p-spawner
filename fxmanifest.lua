@@ -4,7 +4,7 @@ game 'gta5'
 lua54 'yes'
 
 author 'Pinkable'
-version '1.0.0'
+version '1.0.1'
 description '(p-spawner) A modern, well-rounded FiveM vehicle spawner.'
 
 shared_scripts {
